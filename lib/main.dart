@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list/constants/routes.dart';
-// import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_list/provider/items.dart';
 
 void main() {
   runApp(
-    ShoppingList(),
-    // Below is the example how to use providers instead of stateful widget
-    // MultiProvider(
-    //   providers: [],
-    //   child: ShoppingList(),
-    // ),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ItemsProvider(),
+        )
+      ],
+      child: ShoppingList(),
+    ),
   );
 }
 
