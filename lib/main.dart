@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list/constants/routes.dart';
 // import 'package:provider/provider.dart';
 
 void main() {
@@ -16,7 +17,8 @@ class ShoppingList extends StatelessWidget {
   @override
   Widget build(BuildContext? context) {
     return MaterialApp(
-      builder: (context, child) => Scaffold(),
+      initialRoute: Routes.initialRoute,
+      routes: Routes.routesMap,
     );
   }
 }
