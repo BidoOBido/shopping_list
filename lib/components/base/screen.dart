@@ -8,6 +8,7 @@ class ScreenBase extends StatelessWidget {
   final Widget body;
   final Widget? floatingActionButton;
   final Widget? bottomBar;
+  final bool? drawer;
 
   const ScreenBase({
     Key? key,
@@ -15,6 +16,7 @@ class ScreenBase extends StatelessWidget {
     required this.body,
     this.floatingActionButton,
     this.bottomBar,
+    this.drawer,
   }) : super(key: key);
 
   @override
@@ -27,7 +29,13 @@ class ScreenBase extends StatelessWidget {
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: bottomBar,
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      drawer: Drawer(
+      drawer: _getDrawer(context),
+    );
+  }
+
+  Drawer? _getDrawer(BuildContext context) {
+    if (drawer ?? false) {
+      return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -72,7 +80,8 @@ class ScreenBase extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
+    }
+    return null;
   }
 }

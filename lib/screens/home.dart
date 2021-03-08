@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/components/base/screen.dart';
+import 'package:shopping_list/constants/routes.dart';
 import 'package:shopping_list/models/item.dart';
-import 'package:shopping_list/models/unit.dart';
 import 'package:shopping_list/provider/items.dart';
 
 class Home extends StatelessWidget {
@@ -24,6 +24,7 @@ class Home extends StatelessWidget {
     return Consumer<ItemsProvider>(
       builder: (context, value, child) => ScreenBase(
         headerTitle: 'Home Page',
+        drawer: true,
         body: ListView.builder(
           itemCount: value.items.length,
           itemBuilder: (context, index) {
@@ -31,8 +32,7 @@ class Home extends StatelessWidget {
             var places = NumberFormat.currency(
                 decimalDigits: item.unit.decimalPlaces, symbol: '');
 
-            return ListTile(
-              // isThreeLine: true,
+            return CheckboxListTile(
               title: Text(
                 item.description,
                 style: getLineThrough(item),
@@ -41,19 +41,17 @@ class Home extends StatelessWidget {
                 '${places.format(item.quantity)} ${item.unit.description} x R\$${currency.format(item.price)} = R\$${currency.format(item.quantity * item.price)}',
                 style: getLineThrough(item),
               ),
-              trailing: Icon(item.unit.decimalPlaces > 0
-                  ? Icons.line_weight
-                  : Icons.unarchive_outlined),
+              value: item.purchased,
+              onChanged: (checked) => value.changePurchase(item, checked),
+              tristate: false,
             );
           },
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => value.add(Item(
-              description: 'description',
-              price: 3.45,
-              quantity: 5,
-              purchased: true,
-              unit: Unit(description: 'UN', decimalPlaces: 0))),
+          onPressed: () => Navigator.pushNamed(
+            context,
+            Routes.itemsRoute,
+          ),
           child: Icon(Icons.add),
         ),
         bottomBar: BottomAppBar(

@@ -43,4 +43,10 @@ class ItemsProvider with ChangeNotifier {
 
     return returnItem;
   }
+
+  void changePurchase(Item item, bool? value) {
+    item.purchased = value ?? false;
+
+    notifyListeners();
+  }
 }

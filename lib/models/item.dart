@@ -1,11 +1,11 @@
 import 'package:shopping_list/models/unit.dart';
 
 class Item {
-  final String description;
-  final double price;
-  final double quantity;
-  final bool purchased;
-  final Unit unit;
+  String description;
+  double price;
+  double quantity;
+  bool purchased;
+  Unit unit;
 
   Item({
     required this.description,
