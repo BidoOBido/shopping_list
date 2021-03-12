@@ -47,9 +47,6 @@ class Home extends StatelessWidget {
                 arguments: index,
               ),
               onLongPress: () => value.changePurchase(item, !item.purchased),
-              leading: Icon(item.purchased
-                  ? Icons.check_box
-                  : Icons.check_box_outline_blank),
               trailing: Text(item.purchased ? 'Purchased!' : ''),
             );
           },
