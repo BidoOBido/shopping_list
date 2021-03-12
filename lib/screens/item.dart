@@ -83,6 +83,9 @@ class RegisterItem extends StatelessWidget {
                       },
                     ),
                     DropdownButtonFormField(
+                      decoration: InputDecoration(
+                        labelText: 'Unit',
+                      ),
                       onChanged: (Unit? selected) => unit =
                           selected ?? Unit(description: '', decimalPlaces: 0),
                       items: DefaultUnits.units.map(
@@ -97,7 +100,7 @@ class RegisterItem extends StatelessWidget {
                       validator: (value) =>
                           value == null ? 'Please select some unit' : null,
                     ),
-                    TextButton(
+                    ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           if (selectedIndex >= 0) {
