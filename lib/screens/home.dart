@@ -32,7 +32,7 @@ class Home extends StatelessWidget {
             var places = NumberFormat.currency(
                 decimalDigits: item.unit.decimalPlaces, symbol: '');
 
-            return CheckboxListTile(
+            return ListTile(
               title: Text(
                 item.description,
                 style: getLineThrough(item),
@@ -41,9 +41,16 @@ class Home extends StatelessWidget {
                 '${places.format(item.quantity)} ${item.unit.description} x R\$${currency.format(item.price)} = R\$${currency.format(item.quantity * item.price)}',
                 style: getLineThrough(item),
               ),
-              value: item.purchased,
-              onChanged: (checked) => value.changePurchase(item, checked),
-              tristate: false,
+              onTap: () => Navigator.pushNamed(
+                context,
+                Routes.itemsRoute,
+                arguments: index,
+              ),
+              onLongPress: () => value.changePurchase(item, !item.purchased),
+              leading: Icon(item.purchased
+                  ? Icons.check_box
+                  : Icons.check_box_outline_blank),
+              trailing: Text(item.purchased ? 'Purchased!' : ''),
             );
           },
         ),

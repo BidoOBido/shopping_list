@@ -49,4 +49,20 @@ class ItemsProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+  Item update(int index, Item updatedItem) {
+    Item returnItem = _items[index];
+
+    updateTotal(returnItem, true);
+
+    returnItem = updatedItem;
+
+    updateTotal(returnItem, false);
+
+    _items[index] = returnItem;
+
+    notifyListeners();
+
+    return returnItem;
+  }
 }

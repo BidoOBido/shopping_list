@@ -1,6 +1,7 @@
 import 'package:shopping_list/models/unit.dart';
 
 class Item {
+  late int id;
   String description;
   double price;
   double quantity;
