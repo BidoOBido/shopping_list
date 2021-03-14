@@ -5,6 +5,7 @@ import 'package:shopping_list/components/base/screen.dart';
 import 'package:shopping_list/constants/routes.dart';
 import 'package:shopping_list/models/item.dart';
 import 'package:shopping_list/provider/items.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -32,22 +33,57 @@ class Home extends StatelessWidget {
             var places = NumberFormat.currency(
                 decimalDigits: item.unit.decimalPlaces, symbol: '');
 
-            return ListTile(
-              title: Text(
-                item.description,
-                style: getLineThrough(item),
+            return Slidable(
+              actionPane: SlidableScrollActionPane(),
+              actionExtentRatio: .5 * (1 / 3),
+              child: ListTile(
+                title: Center(
+                  child: Text(
+                    item.description,
+                    style: getLineThrough(item),
+                  ),
+                ),
+                subtitle: Center(
+                  child: Text(
+                    '${places.format(item.quantity)} ${item.unit.description} x R\$${currency.format(item.price)} = R\$${currency.format(item.quantity * item.price)}',
+                    style: getLineThrough(item),
+                  ),
+                ),
+                onTap: () => Navigator.pushNamed(
+                  context,
+                  Routes.itemsRoute,
+                  arguments: index,
+                ),
+                onLongPress: () => value.changePurchase(item, !item.purchased),
               ),
-              subtitle: Text(
-                '${places.format(item.quantity)} ${item.unit.description} x R\$${currency.format(item.price)} = R\$${currency.format(item.quantity * item.price)}',
-                style: getLineThrough(item),
-              ),
-              onTap: () => Navigator.pushNamed(
-                context,
-                Routes.itemsRoute,
-                arguments: index,
-              ),
-              onLongPress: () => value.changePurchase(item, !item.purchased),
-              trailing: Text(item.purchased ? 'Purchased!' : ''),
+              actions: [
+                IconSlideAction(
+                  caption: (item.purchased ? 'Undo' : 'Purchase'),
+                  color: item.purchased ? Colors.yellow : Colors.green,
+                  icon: item.purchased
+                      ? Icons.remove_shopping_cart_rounded
+                      : Icons.add_shopping_cart_rounded,
+                  onTap: () => value.changePurchase(item, !item.purchased),
+                ),
+                IconSlideAction(
+                  caption: 'Edit',
+                  color: Colors.blue,
+                  icon: Icons.edit,
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    Routes.itemsRoute,
+                    arguments: index,
+                  ),
+                ),
+              ],
+              secondaryActions: [
+                IconSlideAction(
+                  caption: 'Remove',
+                  color: Colors.red,
+                  icon: Icons.edit,
+                  onTap: () => value.remove(item),
+                ),
+              ],
             );
           },
         ),
