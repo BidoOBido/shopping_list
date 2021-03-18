@@ -1,36 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_list/components/app_localizations.dart';
 import 'package:shopping_list/components/base/screen.dart';
 import 'package:shopping_list/components/formater.dart';
 import 'package:shopping_list/constants/routes.dart';
 import 'package:shopping_list/models/item.dart';
 import 'package:shopping_list/provider/items.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:sprintf/sprintf.dart';
 
-class Home extends StatelessWidget {
+class ShoppingListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ItemsProvider>(
-      builder: (context, value, child) => ScreenBase(
-        headerTitle: 'Home Page',
+      builder: (context, itemsProvider, child) => ScreenBase(
+        headerTitle:
+            AppLocalizations.of(context)!.translate('ShoppingListItemsHeader'),
         drawer: true,
         body: ListView.builder(
-          itemCount: value.items.length,
+          itemCount: itemsProvider.items.length,
           itemBuilder: (context, index) {
-            Item item = value.items[index];
+            Item item = itemsProvider.items[index];
 
             var actions = [
               IconSlideAction(
-                caption: (item.purchased ? 'Undo' : 'Purchase'),
+                caption: (item.purchased
+                    ? AppLocalizations.of(context)!.translate('Undo')
+                    : AppLocalizations.of(context)!.translate('Buy')),
                 color: item.purchased ? Colors.yellow : Colors.green,
                 icon: item.purchased
                     ? Icons.remove_shopping_cart_rounded
                     : Icons.add_shopping_cart_rounded,
-                onTap: () => value.changePurchase(item, !item.purchased),
+                onTap: () =>
+                    itemsProvider.changePurchase(item, !item.purchased),
               ),
               IconSlideAction(
-                caption: 'Edit',
+                caption: AppLocalizations.of(context)!.translate('Edit'),
                 color: Colors.blue,
                 icon: Icons.edit,
                 onTap: () => Navigator.pushNamed(
@@ -43,10 +48,10 @@ class Home extends StatelessWidget {
 
             var secondaryActions = [
               IconSlideAction(
-                caption: 'Remove',
+                caption: AppLocalizations.of(context)!.translate('Remove'),
                 color: Colors.red,
                 icon: Icons.edit,
-                onTap: () => value.remove(item),
+                onTap: () => itemsProvider.remove(item),
               ),
             ];
 
@@ -63,7 +68,7 @@ class Home extends StatelessWidget {
                 ),
                 subtitle: Center(
                   child: Text(
-                    _getSubtitle(item),
+                    _getSubtitle(context, item),
                     style: _getLineThrough(item),
                   ),
                 ),
@@ -72,7 +77,8 @@ class Home extends StatelessWidget {
                   Routes.itemsRoute,
                   arguments: index,
                 ),
-                onLongPress: () => value.changePurchase(item, !item.purchased),
+                onLongPress: () =>
+                    itemsProvider.changePurchase(item, !item.purchased),
               ),
               actions: actions,
               secondaryActions: secondaryActions,
@@ -92,7 +98,8 @@ class Home extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
             child: Text(
-              'Total: R\$ ${Formater.formatCurrency(value.total)}',
+              sprintf(AppLocalizations.of(context)!.translate('TotalString'),
+                  [Formater.formatCurrency(itemsProvider.total)]),
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
@@ -112,6 +119,14 @@ TextStyle? _getLineThrough(Item value) {
   return null;
 }
 
-String _getSubtitle(Item item) {
-  return "${item.unit.formatQuantity(item.quantity)} ${item.unit.abbreviation} x R\$${Formater.formatCurrency(item.price)} = R\$${Formater.formatCurrency(item.quantity * item.price)}";
+String _getSubtitle(BuildContext context, Item item) {
+  return sprintf(
+    AppLocalizations.of(context)!.translate('SubtitleString'),
+    [
+      item.unit.formatQuantity(item.quantity),
+      item.unit.abbreviation,
+      Formater.formatCurrency(item.price),
+      Formater.formatCurrency(item.quantity * item.price)
+    ],
+  );
 }

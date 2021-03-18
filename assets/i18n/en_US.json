@@ -1,0 +1,28 @@
+{
+    "AppName": "Shopping List",
+    "AppAbout": "Do your shopping without forgetting anything!\n\nApplication developed for the purpose of learning in the programming language/framework dart/flutter.",
+    "AppVersion": "v0.1",
+    
+    "About": "About",
+    "Undo": "Undo",
+    "Buy": "Buy",
+    "Edit": "Edit",
+    "Remove": "Remove", 
+    "Description": "Description",
+    "Quantity": "Quantity",
+    "Price": "Price",
+    "Unit": "Unit",
+    "Save": "Save",   
+
+    "ShoppingListItemsHeader": "Shopping list",
+    "SettingsHeader": "Settings",
+    "RegisterItemHeader": "Register item",
+
+    "TotalString": "Total: $%s",
+    "SubtitleString": "%s %s * $%s = $%s",
+
+    "SelectSomeUnit": "Please select some unit",
+    "Quantity>=0": "Quantity must be zero or grater",
+    "Quantity>0": "Quantity must be greater than zero",
+    "InformeDescription": "Please informe some description"
+}

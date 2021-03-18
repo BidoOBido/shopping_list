@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shopping_list/components/app_localizations.dart';
 import 'package:shopping_list/constants/routes.dart';
 
 class ScreenBase extends StatelessWidget {
@@ -44,7 +45,7 @@ class ScreenBase extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.shopping_cart_rounded),
-                  Text('Shopping List')
+                  Text(AppLocalizations.of(context)!.translate('AppName'))
                 ],
               ),
               decoration: BoxDecoration(
@@ -57,22 +58,27 @@ class ScreenBase extends StatelessWidget {
               itemCount: Routes.menuRoutes.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(Routes.menuRoutes[index].title),
+                  title: Text(AppLocalizations.of(context)!
+                      .translate(Routes.menuRoutes[index].title)),
                   onTap: () => Navigator.pushReplacementNamed(
                       context, Routes.menuRoutes[index].route),
                 );
               },
             ),
             ListTile(
-              title: Text('About'),
+              title: Text(
+                AppLocalizations.of(context)!.translate('About'),
+              ),
               onTap: () => showAboutDialog(
                 context: context,
                 applicationIcon: Icon(Icons.info_outline),
-                applicationName: 'AppName',
-                applicationVersion: 'AppVersion',
+                applicationName:
+                    AppLocalizations.of(context)!.translate('AppName'),
+                applicationVersion:
+                    AppLocalizations.of(context)!.translate('AppVersion'),
                 children: <Widget>[
                   Text(
-                    'AppAbout',
+                    AppLocalizations.of(context)!.translate('AppAbout'),
                     textAlign: TextAlign.center,
                   ),
                 ],

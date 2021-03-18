@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_list/components/app_localizations.dart';
 import 'package:shopping_list/components/base/screen.dart';
 import 'package:shopping_list/constants/default_units.dart';
 import 'package:shopping_list/models/item.dart';
@@ -34,7 +35,8 @@ class RegisterItem extends StatelessWidget {
         }
 
         return ScreenBase(
-          headerTitle: 'Item',
+          headerTitle:
+              AppLocalizations.of(context)!.translate('RegisterItemHeader'),
           body: Form(
             key: _formKey,
             child: Padding(
@@ -45,67 +47,77 @@ class RegisterItem extends StatelessWidget {
                     TextFormField(
                       controller: _descriptionController,
                       decoration: InputDecoration(
-                        labelText: 'Description',
+                        labelText: AppLocalizations.of(context)!
+                            .translate('Description'),
                       ),
                       keyboardType: TextInputType.text,
-                      validator: (value) => _descriptionValidator(value),
+                      validator: (value) =>
+                          _descriptionValidator(context, value),
                     ),
                     TextFormField(
                       controller: _quantityController,
                       decoration: InputDecoration(
-                        labelText: 'Quantity',
+                        labelText:
+                            AppLocalizations.of(context)!.translate('Quantity'),
                       ),
                       keyboardType:
                           TextInputType.numberWithOptions(signed: true),
-                      validator: (value) => _quantityValidator(value),
+                      validator: (value) => _quantityValidator(context, value),
                     ),
                     TextFormField(
                       controller: _priceController,
                       decoration: InputDecoration(
-                        labelText: 'Price',
+                        labelText:
+                            AppLocalizations.of(context)!.translate('Price'),
                       ),
                       keyboardType: TextInputType.numberWithOptions(
                           decimal: true, signed: true),
                       validator: (value) {
-                        return _priceValidator(value);
+                        return _priceValidator(context, value);
                       },
                     ),
                     DropdownButtonFormField(
                       decoration: InputDecoration(
-                        labelText: 'Unit',
+                        labelText:
+                            AppLocalizations.of(context)!.translate('Unit'),
                       ),
                       onChanged: (Unit? selected) =>
                           _unit = selected ?? DefaultUnits.units.first,
                       items: _buildUnitList(),
                       value: _unit,
-                      validator: (value) => _unitValidator(value),
+                      validator: (value) => _unitValidator(context, value),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          Item item = Item(
-                            description: _descriptionController.text,
-                            price: double.parse(_priceController.text),
-                            quantity: double.parse(_quantityController.text),
-                            purchased: _purchased,
-                            unit: _unit,
-                          );
-
-                          if (selectedIndex >= 0) {
-                            item.id = selectedIndex;
-
-                            itemsProvider.update(
-                              selectedIndex,
-                              item,
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            Item item = Item(
+                              description: _descriptionController.text,
+                              price: double.parse(_priceController.text),
+                              quantity: double.parse(_quantityController.text),
+                              purchased: _purchased,
+                              unit: _unit,
                             );
-                          } else {
-                            itemsProvider.add(item);
-                          }
 
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text('Save'),
+                            if (selectedIndex >= 0) {
+                              item.id = selectedIndex;
+
+                              itemsProvider.update(
+                                selectedIndex,
+                                item,
+                              );
+                            } else {
+                              itemsProvider.add(item);
+                            }
+
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.translate('Save'),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -128,26 +140,27 @@ class RegisterItem extends StatelessWidget {
     ).toList();
   }
 
-  String? _unitValidator(Object? value) =>
-      value == null ? 'Please select some unit' : null;
+  String? _unitValidator(BuildContext context, Object? value) => value == null
+      ? AppLocalizations.of(context)!.translate('SelectSomeUnit')
+      : null;
 
-  String? _priceValidator(String? value) {
+  String? _priceValidator(BuildContext context, String? value) {
     if (((value ?? '').isEmpty) || (double.parse(value ?? '0') < 0)) {
-      return 'Quantity must be zero or grater';
+      return AppLocalizations.of(context)!.translate('Quantity>=0');
     }
     return null;
   }
 
-  String? _quantityValidator(String? value) {
+  String? _quantityValidator(BuildContext context, String? value) {
     if (((value ?? '').isEmpty) || (double.parse(value ?? '0') < 1)) {
-      return 'Quantity must be greater than zero';
+      return AppLocalizations.of(context)!.translate('Quantity>0');
     }
     return null;
   }
 
-  String? _descriptionValidator(String? value) {
+  String? _descriptionValidator(BuildContext context, String? value) {
     if ((value ?? '').isEmpty) {
-      return 'Please informe some description';
+      return AppLocalizations.of(context)!.translate('InformeDescription');
     }
     return null;
   }
