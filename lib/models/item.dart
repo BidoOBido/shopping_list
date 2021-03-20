@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:shopping_list/models/unit.dart';
 
 class Item {
@@ -14,5 +15,15 @@ class Item {
     required this.quantity,
     required this.purchased,
     required this.unit,
-  });
+  })   : assert(price >= 0),
+        assert(quantity > 0);
+
+  String formatQuantity() {
+    NumberFormat _quantityFormatter = NumberFormat.currency(
+      decimalDigits: unit.decimalPlaces,
+      symbol: '',
+    );
+
+    return _quantityFormatter.format(quantity);
+  }
 }

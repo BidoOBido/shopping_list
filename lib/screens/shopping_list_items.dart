@@ -126,7 +126,7 @@ String _getSubtitle(BuildContext context, Item item) {
   return StringFormatter.sprintf(
     AppLocalizations.of(context)!.translate('SubtitleString'),
     [
-      item.unit.formatQuantity(item.quantity),
+      item.formatQuantity(),
       item.unit.abbreviation,
       Formatter.formatCurrency(
           item.price, AppLocalizations.of(context)!.locale),
