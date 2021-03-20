@@ -16,7 +16,9 @@ class Item {
     required this.purchased,
     required this.unit,
   })   : assert(price >= 0),
-        assert(quantity > 0);
+        assert(quantity > 0),
+        assert(double.parse((quantity).toStringAsFixed(unit.decimalPlaces)) >=
+            quantity);
 
   String formatQuantity() {
     NumberFormat _quantityFormatter = NumberFormat.currency(

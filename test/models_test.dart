@@ -25,25 +25,6 @@ main() {
           expect(originalItem.formatQuantity(), '1');
         },
       );
-      test(
-        'Should return quantity trimmed to 0 decimal placs',
-        () {
-          Unit originalUnit = Unit(
-            description: 'Unit1',
-            abbreviation: 'Un1',
-            decimalPlaces: 0,
-          );
-          Item originalItem = Item(
-            description: 'Product1',
-            price: 2.35,
-            quantity: 1.333,
-            purchased: false,
-            unit: originalUnit,
-          );
-
-          expect(originalItem.formatQuantity(), '1');
-        },
-      );
 
       test(
         'Should return informed quantity',
@@ -57,25 +38,6 @@ main() {
             description: 'Product1',
             price: 2.35,
             quantity: 1.33,
-            purchased: false,
-            unit: originalUnit,
-          );
-
-          expect(originalItem.formatQuantity(), '1.33');
-        },
-      );
-      test(
-        'Should return quantity trimmed to 2 decimal places',
-        () {
-          Unit originalUnit = Unit(
-            description: 'Unit1',
-            abbreviation: 'Un1',
-            decimalPlaces: 2,
-          );
-          Item originalItem = Item(
-            description: 'Product1',
-            price: 2.35,
-            quantity: 1.333,
             purchased: false,
             unit: originalUnit,
           );
@@ -100,7 +62,7 @@ main() {
         ),
       );
       test(
-        'Should return AssertioError on Item create',
+        'Should return AssertionError on Item create caused by quantity = 0',
         () {
           Unit originalUnit = Unit(
             description: 'Unit1',
@@ -112,6 +74,48 @@ main() {
               description: 'Product1',
               price: 2.35,
               quantity: 0,
+              purchased: false,
+              unit: originalUnit,
+            ),
+            throwsAssertionError,
+          );
+        },
+      );
+      test(
+        'Should return AssertionError on Item create caused by incorrect decimal places (0 to 3)',
+        () {
+          Unit originalUnit = Unit(
+            description: 'Unit1',
+            abbreviation: 'Un1',
+            decimalPlaces: 0,
+          );
+
+          expect(
+            () => Item(
+              description: 'Product1',
+              price: 2.35,
+              quantity: 1.333,
+              purchased: false,
+              unit: originalUnit,
+            ),
+            throwsAssertionError,
+          );
+        },
+      );
+      test(
+        'Should return AssertionError on Item create caused by incorrect decimal places (2 to 3)',
+        () {
+          Unit originalUnit = Unit(
+            description: 'Unit1',
+            abbreviation: 'Un1',
+            decimalPlaces: 2,
+          );
+
+          expect(
+            () => Item(
+              description: 'Product1',
+              price: 2.35,
+              quantity: 1.333,
               purchased: false,
               unit: originalUnit,
             ),
