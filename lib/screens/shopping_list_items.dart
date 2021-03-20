@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/components/app_localizations.dart';
 import 'package:shopping_list/components/base/screen.dart';
-import 'package:shopping_list/components/formater.dart';
+import 'package:shopping_list/components/formatter.dart';
 import 'package:shopping_list/constants/routes.dart';
 import 'package:shopping_list/models/item.dart';
 import 'package:shopping_list/provider/items.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:sprintf/sprintf.dart';
+import 'package:sprintf/sprintf.dart' as StringFormatter;
 
 class ShoppingListItems extends StatelessWidget {
   @override
@@ -98,8 +98,11 @@ class ShoppingListItems extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
             child: Text(
-              sprintf(AppLocalizations.of(context)!.translate('TotalString'),
-                  [Formater.formatCurrency(itemsProvider.total)]),
+              StringFormatter.sprintf(
+                  AppLocalizations.of(context)!.translate('TotalString'), [
+                Formatter.formatCurrency(
+                    itemsProvider.total, AppLocalizations.of(context)!.locale)
+              ]),
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
@@ -120,13 +123,15 @@ TextStyle? _getLineThrough(Item value) {
 }
 
 String _getSubtitle(BuildContext context, Item item) {
-  return sprintf(
+  return StringFormatter.sprintf(
     AppLocalizations.of(context)!.translate('SubtitleString'),
     [
       item.unit.formatQuantity(item.quantity),
       item.unit.abbreviation,
-      Formater.formatCurrency(item.price),
-      Formater.formatCurrency(item.quantity * item.price)
+      Formatter.formatCurrency(
+          item.price, AppLocalizations.of(context)!.locale),
+      Formatter.formatCurrency(
+          item.quantity * item.price, AppLocalizations.of(context)!.locale)
     ],
   );
 }
