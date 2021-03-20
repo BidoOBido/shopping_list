@@ -6,7 +6,7 @@ class ItemsProvider with ChangeNotifier {
   double _total = 0.0;
 
   List<Item> get items => _items;
-  double get total => _total;
+  double get total => double.parse((_total).toStringAsFixed(2));
 
   void updateTotal(Item value, bool reduce) {
     _total += (reduce ? -1 : 1) * (value.price * value.quantity);
