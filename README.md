@@ -18,3 +18,9 @@ As the steps will be completed :x: will be replaced by :heavy_check_mark:
 ---
 
 [To run on linux](https://flutter.dev/desktop)
+
+---
+
+To run tests with html coverage report: ```flutter test --coverage && genhtml coverage/lcov.info -o coverage/html```
+
+- Note: ```lcov``` must be installed (```sudo apt install lcov```)
