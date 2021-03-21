@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shopping_list/components/app_localizations.dart';
 import 'package:shopping_list/constants/i18n.dart';
+import 'package:shopping_list/constants/l10n.dart';
 import 'package:shopping_list/constants/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/provider/items.dart';
@@ -28,11 +28,7 @@ class ShoppingList extends StatelessWidget {
       initialRoute: Routes.initialRoute,
       routes: Routes.routesMap,
       supportedLocales: I18N.suportedLocales,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
+      localizationsDelegates: L10n.delegates,
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
           if (supportedLocale.languageCode == locale?.languageCode &&
