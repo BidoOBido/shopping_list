@@ -24,5 +24,6 @@
     "SelectSomeUnit": "Por favor, informe alguma unidade",
     "Quantity>=0": "Quantidade deve ser zero ou maior",
     "Quantity>0": "Quantidade deve ser maior que zero",
-    "InformeDescription": "Por favor, informe alguma descrição"
+    "InformeDescription": "Por favor, informe alguma descrição",
+    "TheresNoSettingsYet": "Ainda não existem configurações"
 }

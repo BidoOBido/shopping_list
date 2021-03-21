@@ -24,5 +24,6 @@
     "SelectSomeUnit": "Please select some unit",
     "Quantity>=0": "Quantity must be zero or grater",
     "Quantity>0": "Quantity must be greater than zero",
-    "InformeDescription": "Please informe some description"
+    "InformeDescription": "Please informe some description",
+    "TheresNoSettingsYet": "There's no settings yet"
 }

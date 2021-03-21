@@ -8,7 +8,9 @@ class Settings extends StatelessWidget {
     return ScreenBase(
       headerTitle: AppLocalizations.of(context)!.translate('SettingsHeader'),
       body: Center(
-        child: Text("There's no settings yet"),
+        child: Text(
+          AppLocalizations.of(context)!.translate('TheresNoSettingsYet'),
+        ),
       ),
     );
   }
