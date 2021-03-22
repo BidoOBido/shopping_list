@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_list/components/app_localizations.dart';
-import 'package:shopping_list/constants/i18n.dart';
-import 'package:shopping_list/constants/l10n.dart';
 import 'package:shopping_list/constants/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/provider/items.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(
@@ -23,21 +21,11 @@ class ShoppingList extends StatelessWidget {
   @override
   Widget build(BuildContext? context) {
     return MaterialApp(
-      onGenerateTitle: (context) =>
-          AppLocalizations.of(context)!.translate('AppName'),
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
       initialRoute: Routes.initialRoute,
       routes: Routes.routesMap,
-      supportedLocales: I18N.suportedLocales,
-      localizationsDelegates: L10n.delegates,
-      localeResolutionCallback: (locale, supportedLocales) {
-        for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale?.languageCode &&
-              supportedLocale.countryCode == locale?.countryCode) {
-            return supportedLocale;
-          }
-        }
-        return supportedLocales.first;
-      },
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
     );
   }
 }

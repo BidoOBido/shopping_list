@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:shopping_list/components/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shopping_list/constants/routes.dart';
 
 class ScreenBase extends StatelessWidget {
@@ -45,7 +45,7 @@ class ScreenBase extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.shopping_cart_rounded),
-                  Text(AppLocalizations.of(context)!.translate('AppName'))
+                  Text(AppLocalizations.of(context)!.appName)
                 ],
               ),
               decoration: BoxDecoration(
@@ -55,30 +55,27 @@ class ScreenBase extends StatelessWidget {
             ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: Routes.menuRoutes.length,
+              itemCount: Routes.menuRoutes(context).length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(AppLocalizations.of(context)!
-                      .translate(Routes.menuRoutes[index].title)),
+                  title: Text(Routes.menuRoutes(context)[index].title),
                   onTap: () => Navigator.pushReplacementNamed(
-                      context, Routes.menuRoutes[index].route),
+                      context, Routes.menuRoutes(context)[index].route),
                 );
               },
             ),
             ListTile(
               title: Text(
-                AppLocalizations.of(context)!.translate('About'),
+                AppLocalizations.of(context)!.about,
               ),
               onTap: () => showAboutDialog(
                 context: context,
                 applicationIcon: Icon(Icons.info_outline),
-                applicationName:
-                    AppLocalizations.of(context)!.translate('AppName'),
-                applicationVersion:
-                    AppLocalizations.of(context)!.translate('AppVersion'),
+                applicationName: AppLocalizations.of(context)!.appName,
+                applicationVersion: AppLocalizations.of(context)!.appVersion,
                 children: <Widget>[
                   Text(
-                    AppLocalizations.of(context)!.translate('AppAbout'),
+                    AppLocalizations.of(context)!.appAbout,
                     textAlign: TextAlign.center,
                   ),
                 ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_list/components/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shopping_list/components/base/screen.dart';
 import 'package:shopping_list/components/formatter.dart';
 import 'package:shopping_list/constants/routes.dart';
@@ -14,8 +14,7 @@ class ShoppingListItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ItemsProvider>(
       builder: (context, itemsProvider, child) => ScreenBase(
-        headerTitle:
-            AppLocalizations.of(context)!.translate('ShoppingListItemsHeader'),
+        headerTitle: AppLocalizations.of(context)!.shoppingListItemsHeader,
         drawer: true,
         body: ListView.builder(
           itemCount: itemsProvider.items.length,
@@ -25,8 +24,8 @@ class ShoppingListItems extends StatelessWidget {
             var actions = [
               IconSlideAction(
                 caption: (item.purchased
-                    ? AppLocalizations.of(context)!.translate('Undo')
-                    : AppLocalizations.of(context)!.translate('Buy')),
+                    ? AppLocalizations.of(context)!.undo
+                    : AppLocalizations.of(context)!.buy),
                 color: item.purchased ? Colors.yellow : Colors.green,
                 icon: item.purchased
                     ? Icons.remove_shopping_cart_rounded
@@ -35,7 +34,7 @@ class ShoppingListItems extends StatelessWidget {
                     itemsProvider.changePurchase(item, !item.purchased),
               ),
               IconSlideAction(
-                caption: AppLocalizations.of(context)!.translate('Edit'),
+                caption: AppLocalizations.of(context)!.edit,
                 color: Colors.blue,
                 icon: Icons.edit,
                 onTap: () => Navigator.pushNamed(
@@ -48,7 +47,7 @@ class ShoppingListItems extends StatelessWidget {
 
             var secondaryActions = [
               IconSlideAction(
-                caption: AppLocalizations.of(context)!.translate('Remove'),
+                caption: AppLocalizations.of(context)!.remove,
                 color: Colors.red,
                 icon: Icons.edit,
                 onTap: () => itemsProvider.remove(item),
@@ -99,9 +98,11 @@ class ShoppingListItems extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
             child: Text(
               StringFormatter.sprintf(
-                  AppLocalizations.of(context)!.translate('TotalString'), [
+                  AppLocalizations.of(context)!.totalString, [
                 Formatter.formatCurrency(
-                    itemsProvider.total, AppLocalizations.of(context)!.locale)
+                  itemsProvider.total,
+                  Localizations.localeOf(context),
+                ),
               ]),
               style: Theme.of(context).textTheme.headline6,
             ),
@@ -124,14 +125,18 @@ TextStyle? _getLineThrough(Item value) {
 
 String _getSubtitle(BuildContext context, Item item) {
   return StringFormatter.sprintf(
-    AppLocalizations.of(context)!.translate('SubtitleString'),
+    AppLocalizations.of(context)!.subtitleString,
     [
       item.formatQuantity(),
       item.unit.abbreviation,
       Formatter.formatCurrency(
-          item.price, AppLocalizations.of(context)!.locale),
+        item.price,
+        Localizations.localeOf(context),
+      ),
       Formatter.formatCurrency(
-          item.quantity * item.price, AppLocalizations.of(context)!.locale)
+        item.quantity * item.price,
+        Localizations.localeOf(context),
+      )
     ],
   );
 }

@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   cupertino_icons: ^1.0.2
   provider: ^5.0.0
@@ -21,11 +23,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/i18n/en_US.json
-    - assets/i18n/pt_BR.json
+  generate: true

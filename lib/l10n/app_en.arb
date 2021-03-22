@@ -1,0 +1,94 @@
+{
+    "appName": "Shopping List",
+    "@appName": {
+        "description": "Application's name"
+    },
+    "appAbout": "Do your shopping without forgetting anything!\n\nApplication developed for the purpose of learning in the programming language/framework dart/flutter.",
+    "@appAbout": {
+        "description": "Brief explanation about application"
+    },
+    "appVersion": "v0.1",
+    "@appVersion": {
+        "description": "Application's version"
+    },
+    "about": "About",
+    "@about": {
+        "description": "Label 'about' on menus and buttons"
+    },
+    "undo": "Undo",
+    "@undo": {
+        "description": "Label 'undo' on menus and buttons"
+    },
+    "buy": "Buy",
+    "@buy": {
+        "description": "Label 'but' on menus and buttons"
+    },
+    "edit": "Edit",
+    "@edit": {
+        "description": "Label 'edit' on menus and buttons"
+    },
+    "remove": "Remove",
+    "@remove": {
+        "description": "Label 'remove' on menus and buttons"
+    },
+    "description": "Description",
+    "@description": {
+        "description": "Label 'description' on menus and buttons"
+    },
+    "quantity": "Quantity",
+    "@quantity": {
+        "description": "Label 'quantity' on menus and buttons"
+    },
+    "price": "Price",
+    "@price": {
+        "description": "Label 'price' on menus and buttons"
+    },
+    "unit": "Unit",
+    "@unit": {
+        "description": "Label 'unit' on menus and buttons"
+    },
+    "save": "Save",
+    "@save": {
+        "description": "Label 'save' on menus and buttons"
+    },
+    "shoppingListItemsHeader": "Shopping list",
+    "@shoppingListItemsHeader": {
+        "description": "Header title for Shopping list screen"
+    },
+    "settingsHeader": "Settings",
+    "@settingsHeader": {
+        "description": "Header title for Settings screen"
+    },
+    "registerItemHeader": "Register item",
+    "@registerItemHeader": {
+        "description": "Header title for Register item screen"
+    },
+    "totalString": "Total: %s",
+    "@totalString": {
+        "description": "Represents the total sum of items price, $ can be changed for localizate the currency symbol, %s must not be changed"
+    },
+    "subtitleString": "%s %s * $%s = %s",
+    "@subtitleString": {
+        "description": "Represent the calculation of a item as follow ```(quantity) (unity) * (currency symbol) (price) = (currency symbol) (total)```[example: 1.5kg * $2.33 = $3.495]. $ can be changed for localizate the currency symbol, %s must not be changed"
+    },
+    "selectSomeUnit": "Please select some unit",
+    "@selectSomeUnit": {
+        "description": "Friendly message asking to user select some unit"
+    },
+    "quantityGreatherThanOrEqual0": "Quantity must be zero or grater",
+    "@quantityGreatherThanOrEqual0": {
+        "description": "Friendly message informing user that quantity must be zero or greater"
+    },
+    "quantityGreatherThan0": "Quantity must be greater than zero",
+    "@quantityGreatherThan0": {
+        "description": "Friendly message informing user that quantity must be greater than zero"
+    },
+    "informeDescription": "Please informe some description",
+    "@informeDescription": {
+        "description": "Friendly message asking to user informe some description"
+    },
+    "theresNoSettingsYet": "There's no settings yet",
+    "@theresNoSettingsYet": {
+        "description": "Friendly message informing that there is no settings yet"
+    }
+}

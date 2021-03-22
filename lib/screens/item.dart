@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_list/components/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shopping_list/components/base/screen.dart';
 import 'package:shopping_list/constants/default_units.dart';
 import 'package:shopping_list/models/item.dart';
@@ -35,8 +35,7 @@ class RegisterItem extends StatelessWidget {
         }
 
         return ScreenBase(
-          headerTitle:
-              AppLocalizations.of(context)!.translate('RegisterItemHeader'),
+          headerTitle: AppLocalizations.of(context)!.registerItemHeader,
           body: Form(
             key: _formKey,
             child: Padding(
@@ -47,8 +46,7 @@ class RegisterItem extends StatelessWidget {
                     TextFormField(
                       controller: _descriptionController,
                       decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!
-                            .translate('Description'),
+                        labelText: AppLocalizations.of(context)!.description,
                       ),
                       keyboardType: TextInputType.text,
                       validator: (value) =>
@@ -57,8 +55,7 @@ class RegisterItem extends StatelessWidget {
                     TextFormField(
                       controller: _quantityController,
                       decoration: InputDecoration(
-                        labelText:
-                            AppLocalizations.of(context)!.translate('Quantity'),
+                        labelText: AppLocalizations.of(context)!.quantity,
                       ),
                       keyboardType:
                           TextInputType.numberWithOptions(signed: true),
@@ -67,8 +64,7 @@ class RegisterItem extends StatelessWidget {
                     TextFormField(
                       controller: _priceController,
                       decoration: InputDecoration(
-                        labelText:
-                            AppLocalizations.of(context)!.translate('Price'),
+                        labelText: AppLocalizations.of(context)!.price,
                       ),
                       keyboardType: TextInputType.numberWithOptions(
                           decimal: true, signed: true),
@@ -78,8 +74,7 @@ class RegisterItem extends StatelessWidget {
                     ),
                     DropdownButtonFormField(
                       decoration: InputDecoration(
-                        labelText:
-                            AppLocalizations.of(context)!.translate('Unit'),
+                        labelText: AppLocalizations.of(context)!.unit,
                       ),
                       onChanged: (Unit? selected) =>
                           _unit = selected ?? DefaultUnits.units.first,
@@ -115,7 +110,7 @@ class RegisterItem extends StatelessWidget {
                           }
                         },
                         child: Text(
-                          AppLocalizations.of(context)!.translate('Save'),
+                          AppLocalizations.of(context)!.save,
                         ),
                       ),
                     ),
@@ -140,27 +135,26 @@ class RegisterItem extends StatelessWidget {
     ).toList();
   }
 
-  String? _unitValidator(BuildContext context, Object? value) => value == null
-      ? AppLocalizations.of(context)!.translate('SelectSomeUnit')
-      : null;
+  String? _unitValidator(BuildContext context, Object? value) =>
+      value == null ? AppLocalizations.of(context)!.selectSomeUnit : null;
 
   String? _priceValidator(BuildContext context, String? value) {
     if (((value ?? '').isEmpty) || (double.parse(value ?? '0') < 0)) {
-      return AppLocalizations.of(context)!.translate('Quantity>=0');
+      return AppLocalizations.of(context)!.quantityGreatherThanOrEqual0;
     }
     return null;
   }
 
   String? _quantityValidator(BuildContext context, String? value) {
     if (((value ?? '').isEmpty) || (double.parse(value ?? '0') < 1)) {
-      return AppLocalizations.of(context)!.translate('Quantity>0');
+      return AppLocalizations.of(context)!.quantityGreatherThan0;
     }
     return null;
   }
 
   String? _descriptionValidator(BuildContext context, String? value) {
     if ((value ?? '').isEmpty) {
-      return AppLocalizations.of(context)!.translate('InformeDescription');
+      return AppLocalizations.of(context)!.informeDescription;
     }
     return null;
   }

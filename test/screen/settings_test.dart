@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopping_list/constants/i18n.dart';
-import 'package:shopping_list/constants/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shopping_list/screens/settings.dart';
 
 void main() {
@@ -10,8 +9,8 @@ void main() {
     (WidgetTester tester) async {
       await tester.pumpWidget(
         Localizations(
-          delegates: L10n.delegates,
-          locale: I18N.suportedLocales.first,
+          delegates: AppLocalizations.localizationsDelegates,
+          locale: AppLocalizations.supportedLocales.first,
           child: Settings(),
         ),
       );
